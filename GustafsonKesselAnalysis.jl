@@ -7,8 +7,8 @@ using InteractiveUtils
 # ╔═╡ ccf06d82-ca91-4133-8615-b1c4a68371f4
 begin 
 	using Colors, Distributions, Plots, Random, FuzzyLogic, LinearAlgebra
-	push!(LOAD_PATH, ".")
-	using GustafsonKessel
+	include("./GustafsonKessel.jl")
+	using .GustafsonKessel
 end
 
 # ╔═╡ e5aa830e-24e7-4fb0-92b4-6adc635fa357
@@ -179,12 +179,10 @@ let
 	p
 end
 
-# ╔═╡ 1f36a25d-a52c-4384-a277-a7a2c8205ef6
-
-
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
+Clustering = "aaaa29a8-35af-508c-8bc3-b662a17a0fe5"
 Colors = "5ae59095-9a9b-59fe-a467-6f913c188581"
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
 FuzzyLogic = "271df9f8-4390-4196-9d4f-bdd0b67035b3"
@@ -193,6 +191,7 @@ Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 
 [compat]
+Clustering = "~0.15.8"
 Colors = "~0.13.1"
 Distributions = "~0.25.120"
 FuzzyLogic = "~0.1.3"
@@ -205,7 +204,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.11.5"
 manifest_format = "2.0"
-project_hash = "9e1c943320ad6800d926f5442d703afe14634fc7"
+project_hash = "0b7b619199a1fbece81e9ea3ac9c2ebb59eabe41"
 
 [[deps.AliasTables]]
 deps = ["PtrArrays", "Random"]
@@ -241,6 +240,12 @@ deps = ["Artifacts", "Bzip2_jll", "CompilerSupportLibraries_jll", "Fontconfig_jl
 git-tree-sha1 = "fde3bf89aead2e723284a8ff9cdf5b551ed700e8"
 uuid = "83423d85-b0ee-5818-9007-b63ccbeb887a"
 version = "1.18.5+0"
+
+[[deps.Clustering]]
+deps = ["Distances", "LinearAlgebra", "NearestNeighbors", "Printf", "Random", "SparseArrays", "Statistics", "StatsBase"]
+git-tree-sha1 = "3e22db924e2945282e70c33b75d4dde8bfa44c94"
+uuid = "aaaa29a8-35af-508c-8bc3-b662a17a0fe5"
+version = "0.15.8"
 
 [[deps.CodecZlib]]
 deps = ["TranscodingStreams", "Zlib_jll"]
@@ -339,6 +344,20 @@ deps = ["Indexing", "Random", "Serialization"]
 git-tree-sha1 = "1f3b7b0d321641c1f2e519f7aed77f8e1f6cb133"
 uuid = "85a47980-9c8c-11e8-2b9f-f7ca1fa99fb4"
 version = "0.3.29"
+
+[[deps.Distances]]
+deps = ["LinearAlgebra", "Statistics", "StatsAPI"]
+git-tree-sha1 = "c7e3a542b999843086e2f29dac96a618c105be1d"
+uuid = "b4f34e82-e78d-54a5-968a-f98e89d6e8f7"
+version = "0.10.12"
+
+    [deps.Distances.extensions]
+    DistancesChainRulesCoreExt = "ChainRulesCore"
+    DistancesSparseArraysExt = "SparseArrays"
+
+    [deps.Distances.weakdeps]
+    ChainRulesCore = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
+    SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 
 [[deps.Distributions]]
 deps = ["AliasTables", "FillArrays", "LinearAlgebra", "PDMats", "Printf", "QuadGK", "Random", "SpecialFunctions", "Statistics", "StatsAPI", "StatsBase", "StatsFuns"]
@@ -740,6 +759,12 @@ git-tree-sha1 = "9b8215b1ee9e78a293f99797cd31375471b2bcae"
 uuid = "77ba4419-2d1f-58cd-9bb1-8ffee604a2e3"
 version = "1.1.3"
 
+[[deps.NearestNeighbors]]
+deps = ["Distances", "StaticArrays"]
+git-tree-sha1 = "8a3271d8309285f4db73b4f662b1b290c715e85e"
+uuid = "b8a86587-4115-5ab1-83bc-aa920d37bbce"
+version = "0.4.21"
+
 [[deps.NetworkOptions]]
 uuid = "ca575930-c2e3-43a9-ace4-1e988b2c1908"
 version = "1.2.0"
@@ -1030,6 +1055,25 @@ deps = ["Random"]
 git-tree-sha1 = "95af145932c2ed859b63329952ce8d633719f091"
 uuid = "860ef19b-820b-49d6-a774-d7a799459cd3"
 version = "1.0.3"
+
+[[deps.StaticArrays]]
+deps = ["LinearAlgebra", "PrecompileTools", "Random", "StaticArraysCore"]
+git-tree-sha1 = "0feb6b9031bd5c51f9072393eb5ab3efd31bf9e4"
+uuid = "90137ffa-7385-5640-81b9-e52037218182"
+version = "1.9.13"
+
+    [deps.StaticArrays.extensions]
+    StaticArraysChainRulesCoreExt = "ChainRulesCore"
+    StaticArraysStatisticsExt = "Statistics"
+
+    [deps.StaticArrays.weakdeps]
+    ChainRulesCore = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
+    Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
+
+[[deps.StaticArraysCore]]
+git-tree-sha1 = "192954ef1208c7019899fbf8049e717f92959682"
+uuid = "1e83bf80-4336-4d27-bf5d-d5a4f845583c"
+version = "1.4.3"
 
 [[deps.Statistics]]
 deps = ["LinearAlgebra"]
@@ -1447,6 +1491,5 @@ version = "1.8.1+0"
 # ╠═c335fac8-2afa-4469-8e80-846eff2108f2
 # ╠═86a5858a-f174-418f-82b6-208c492f5db9
 # ╠═0ad70f8a-3095-4a42-bff1-b312ad5cd6d7
-# ╠═1f36a25d-a52c-4384-a277-a7a2c8205ef6
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

@@ -7,8 +7,8 @@ using InteractiveUtils
 # ╔═╡ 4a4cb9c0-55b1-11f0-0066-39930f838a97
 begin
 	using Plots, FuzzyLogic, CSV, DataFrames, StatsBase, MultivariateStats, Random, PyCall
-	push!(LOAD_PATH, ".")
-	using GustafsonKessel
+	include("./GustafsonKessel.jl")
+	using .GustafsonKessel
 
 	colors = palette(:default)
 end
@@ -129,13 +129,6 @@ begin
 	savefig(plot_memberships(X_pca, labels, label_names), "./plots/iris_dist.pdf")
 	#heatmap(cov(X'), clims = (-1, 1), xticks=(1:length(numeric_cols), numeric_cols),
     #yticks=(1:length(numeric_cols), numeric_cols), xrotation=45)
-end
-
-# ╔═╡ 2af0c36f-0076-4898-ad53-6fb46acc6f78
-begin
-	a = 2
-	b = 1
-	scatter(X[a, :], X[b, :], color=colors[labels .+ 1])
 end
 
 # ╔═╡ 1474fbf7-d4fe-4bf0-a416-42558ed339ae
@@ -1620,7 +1613,6 @@ version = "1.8.1+0"
 # ╠═31ce7152-2318-4ec1-9bdb-6dbdd2b6e8dd
 # ╠═4e984354-e982-48ac-a430-268c93f0565c
 # ╠═e8893142-87fb-4f51-8326-177ccf5d9736
-# ╠═2af0c36f-0076-4898-ad53-6fb46acc6f78
 # ╠═1474fbf7-d4fe-4bf0-a416-42558ed339ae
 # ╠═f22268bc-389d-43df-9e8c-782bc1bfe8db
 # ╠═802754e7-9a41-4025-87e7-1e78346c1557
